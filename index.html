@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Island Escape Room</title>
+
+    <style>
+        h1 {
+            color: blue;
+        }
+
+        h1:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div>
+            <img />
+            <h1 id="title" onclick="changeColor()">The Island</h1>
+        </div>
+        <nav>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <section>
+            <a href="https://islandescaperoom.resova.us/items/availability?firstPage=true" target="_blank">Book now!</a>
+        </section>
+        <section></section>
+        <section></section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </footer>
+
+    <script>
+        let colors = ["red", "green", "gray", "pink", "yellow", "blue", "cyan"]
+        let num = 0
+        function changeColor() {
+            document.getElementById('title').style.color = colors[num]
+            num++
+            if (num > colors.length - 1) num = 0
+        }
+    </script>
+</body>
+</html>
