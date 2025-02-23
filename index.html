@@ -59,7 +59,15 @@
             fill: white;
         }
 
+        /* Header */
         header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            width: 100vw;
+            box-sizing: border-box;
             height: var(--nav-height);
             display: flex;
             padding: 0 3vw;
@@ -89,6 +97,7 @@
             letter-spacing: 1px;
         }
 
+        /* Nav Desktop */
         nav {
             width: 50%;
         }
@@ -134,7 +143,49 @@
             fill: var(--text-primary-color);
         }
 
+        /* Nav Mobile */
+        #nav-mobile {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        #mobile-nav-icon {
+            height: 55%;
+            transition: all 0.3s;
+        }
+
+        #mobile-nav-icon.active {
+            fill: var(--bg-color-tertiary);
+        }
+
+        #mobile-nav-dropdown {
+            opacity: 0;
+            max-height: 0;
+            position: fixed;
+            z-index: 1000;
+            top: var(--nav-height);
+            left: 0;
+            width: 100vw;
+            background-color: rgba(0, 0, 0, 0.664);
+            transition: all 0.3s;
+        }
+
+        #mobile-nav-dropdown.show {
+            opacity: 1;
+            max-height: 700px;
+        }
+
+        #mobile-nav-dropdown ul {
+            display: flex;
+            flex-direction: column;
+            padding: 20px 10px;
+        }
+
+        /* Hero */
         #section-hero {
+            margin-top: var(--nav-height);
             height: calc(100vh - var(--nav-height) + 1px);
             display: flex;
             justify-content: center;
@@ -185,11 +236,13 @@
             transition: all 0.3s;
         }
 
+        /* About */
         #about {
             padding: 80px 5vw;
             background-color: rgb(233, 233, 233);
         }
 
+        /* Footer */
         footer {
             padding-bottom: 100px;
             background-color: var(--bg-secondary-color);
@@ -297,8 +350,15 @@
             .info-blocks-container div {
                 flex: 1 1 100%; /* Each div takes up full width */
             }
+            header {
+                justify-content: space-between;
+                /* align-items: center; */
+            }
             #nav-desktop {
                 display: none;
+            }
+            #nav-mobile {
+                display: flex;
             }
             #hero-text-container h1 {
                 font-size: 3rem;
@@ -330,10 +390,10 @@
         <nav id="nav-desktop">
             <ul>
                 <li>
-                    <a href="#about">ABOUT</a>
+                    <a onclick="scrollToSection('about')">ABOUT</a>
                 </li>
                 <li>
-                    <a href="#contact">CONTACT</a>
+                    <a onclick="scrollToSection('contact')">CONTACT</a>
                 </li>
                 <li>
                     <a class="btn book-now nav" href="https://islandescaperoom.resova.us/items/availability?firstPage=true" target="_blank">
@@ -348,9 +408,27 @@
 
         <!-- Mobile Nav -->
         <div id="nav-mobile">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <svg id="mobile-nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                 <path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/>
             </svg>
+            <nav id="mobile-nav-dropdown">
+                <ul>
+                    <li>
+                        <a onclick="scrollToSection('about')">ABOUT</a>
+                    </li>
+                    <li>
+                        <a onclick="scrollToSection('contact')">CONTACT</a>
+                    </li>
+                    <li>
+                        <a class="btn book-now nav" href="https://islandescaperoom.resova.us/items/availability?firstPage=true" target="_blank">
+                            <span>BOOK NOW</span>
+                            <svg class="book-now-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         
     </header>
@@ -455,6 +533,41 @@
         // Add a marker with a popup
         var marker = L.marker([37.72011838051414, -89.21757094312746]).addTo(map)
         marker.bindPopup("<a href='https://www.google.com/maps/place/Island+Escape+Room/@37.7200281,-89.2174235,20.36z/data=!4m6!3m5!1s0x887713458faba569:0xae57791bc3a4154f!8m2!3d37.7201223!4d-89.2174293!16s%2Fg%2F11y7s89xzp?authuser=0&entry=ttu&g_ep=EgoyMDI1MDIxOC4wIKXMDSoASAFQAw%3D%3D' target='_blank'>Island Escape Room</a>").openPopup()
+
+        // Get references to the button and dropdown menu
+        const dropdownToggle = document.getElementById('mobile-nav-icon')
+        const dropdownMenu = document.getElementById('mobile-nav-dropdown')
+
+        // Add an event listener to toggle the dropdown menu on click
+        dropdownToggle.addEventListener('click', function() {
+            // Toggle the display property of the dropdown menu
+            dropdownToggle.classList.toggle('active')
+            dropdownMenu.classList.toggle('show')
+            // if (dropdownMenu.style.display === 'block') {
+            //     dropdownMenu.style.display = 'none'  // Hide the dropdown
+            //     dropdownToggle.classList.remove("active")
+            // } else {
+            //     dropdownMenu.style.display = 'block' // Show the dropdown
+            //     dropdownToggle.classList.add("active")
+            // }
+        })
+
+        // Optional: Close the dropdown if clicked outside
+        document.addEventListener('click', function(event) {
+            if (!dropdownToggle.contains(event.target)) {
+                dropdownToggle.classList.remove('active')
+                dropdownMenu.classList.remove('show')
+            }
+        })
+
+        const scrollToSection = (elementId) => {
+            const navbarHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'), 10)
+            const targetSection = document.getElementById(elementId)
+            window.scrollTo({
+                top: targetSection.offsetTop - navbarHeight,
+                behavior: 'smooth'
+            })
+        }
     </script>
 </body>
 </html>
