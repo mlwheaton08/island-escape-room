@@ -4,20 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Island Escape Room</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <style>
+        :root {
+            /* font-size: 16px;  Note: this is the default font size for most browsers already, so no need to adjust it. also it may be better to leave it alone for accessibility purposes, like a user having their font size larger */
+            --text-tertiary-color: rgb(247, 216, 46);
+        }
+
         body {
             margin: 0;
-            font-family: 'Roboto', sans-serif;
+            font-family: "Titillium Web", serif;
+            font-weight: 300;
+            font-style: normal;
         }
 
-        h1 {
-            color: blue;
+        h2 {
+            text-align: center;
+            margin: 0;
+            padding: 10px 0;
+            font-size: 3rem;
+            font-weight: 200;
+            letter-spacing: 1px;
         }
 
-        h1:hover {
-            cursor: pointer;
+        h3 {
+            font-size: 1.4rem;
+            margin-top: 0;
+        }
+
+        p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        svg {
+            /* padding: 0px; */
+            /* width: 37px;
+            height: 37px; */
+            fill: white;
+        }
+
+        #section-why-us {
+            padding: 80px 5vw;
+            background-color: rgb(233, 233, 233);
         }
 
         footer {
@@ -27,34 +59,73 @@
 
         #map { height: 400px; }
 
-        #footer-contact {
+        .info-blocks-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
-            padding: 10px 40px;
+            padding: 20px 40px;
         }
 
-        #footer-contact div {
+        .info-blocks-container > * {
+            text-align: center;
+        }
+
+        .info-blocks-container div {
             flex: 1 1 22%;  /* Adjust the width of each div */
             margin: 10px;   /* Add space between items */
+            max-width: 350px;
         }
 
         /* For smaller screens (e.g., tablets and below), use 2 items per row */
         @media (max-width: 768px) {
-            #footer-contact div {
+            h2 {
+                font-size: 2.3rem;
+            }
+            .info-blocks-container div {
                 flex: 1 1 45%; /* Each div takes 45% of the row */
+            }
+            #section-why-us {
+                padding: 60px 0;
             }
         }
 
         /* For mobile screens, stack all items vertically */
         @media (max-width: 480px) {
-            #footer-contact div {
+            h2 {
+                font-size: 1.7rem;
+                font-weight: 300;
+            }
+            h3 {
+                font-size: 1.2rem;
+            }
+            .info-blocks-container div {
                 flex: 1 1 100%; /* Each div takes up full width */
+            }
+            #section-why-us {
+                padding: 40px 0;
             }
         }
 
-        #footer-contact > * {
-            text-align: center;
+        .info-blocks-container.contact h3 {
+            color: var(--text-tertiary-color);
+        }
+
+        #socials-icons-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px
+        }
+
+        .socials-icon {
+            width: 100%;
+            height: 100%;
+            margin: auto;
+            transition: all 0.5s;
+        }
+
+        .socials-icon:hover {
+            fill: var(--text-tertiary-color);
         }
     </style>
 </head>
@@ -63,7 +134,7 @@
     <header>
         <div>
             <img />
-            <h1 id="title" onclick="changeColor()">The Island</h1>
+            <h1 id="title">The Island</h1>
         </div>
         <nav>
             <ul>
@@ -80,31 +151,63 @@
             <a href="https://islandescaperoom.resova.us/items/availability?firstPage=true" target="_blank">Book now!</a>
         </section>
         <section></section>
-        <section></section>
+        <section id="section-why-us">
+            <h2>WHY CHOOSE US?</h2>
+            <div class="info-blocks-container why-us">
+                <div>
+                    <h3>Team Building</h3>
+                    <p>Strengthen bonds! Work together to solve challenges and create lasting memories with your team!</p>
+                </div>
+                <div>
+                    <h3>Family Fun</h3>
+                    <p>Fun for everyone! Our escape rooms are perfect for kids over 11, teens, and adults alike! Join the fun! Free for younger ages.</p>
+                </div>
+                <div>
+                    <h3>1 hour of Memorable Experiences</h3>
+                    <p>Create unforgettable moments! Every visit is a new adventure filled with laughter and excitement!</p>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- FOOTER -->
     <footer>
-        <h2 style="text-align: center; margin: 0; padding: 10px 0;">YOU CAN FIND US HERE</h2>
+        <h2>YOU CAN FIND US HERE</h2>
         <div id="map"></div>
-        <section id="footer-contact">
+        <section class="info-blocks-container contact">
             <div>
                 <h3>Address</h3>
-                <p>Address goes here</p>
+                <p>
+                    715 S University Ave
+                    <br>Carbondale, IL 62901
+                    
+                    <br><br><i>*on the 2nd story</i>
+                </p>
             </div>
             <div>
                 <h3>Parking</h3>
-                <p>Parking info goes here</p>
+                <p>Parking is on a first come first serve basis, but <b>SIU</b> has free parking after <b>4pm</b>. The Lutheran Church across the street also has a parking lot.</p>
             </div>
             <div>
                 <h3>Contact</h3>
-                <p>Contact info goes here</p>
+                <p>
+                    (618) 999-1126
+                    <br>islandescaperoom@gmail.com
+                </p>
             </div>
             <div>
                 <h3>Socials</h3>
-                <div>
-                    <span>[icon]</span>
-                    <span>[icon]</span>
+                <div id="socials-icons-container">
+                    <a style="width: 37px; height: 37px; padding: 3px;" href="https://www.facebook.com/people/Island-Escape-Room/61557573101458/" target="_blank">
+                        <svg class="socials-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"/>
+                        </svg>
+                    </a>
+                    <a style="width: 37px; height: 37px; padding: 3px;" href="https://www.instagram.com/islandescaperoom/" target="_blank">
+                        <svg class="socials-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </section>
@@ -112,14 +215,6 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
-        let colors = ["red", "green", "gray", "pink", "yellow", "blue", "cyan"]
-        let num = 0
-        function changeColor() {
-            document.getElementById('title').style.color = colors[num]
-            num++
-            if (num > colors.length - 1) num = 0
-        }
-
         // Initialize the map
         var map = L.map('map').setView([37.72011838051414, -89.21757094312746], 16) // Center on your coordinates
 
