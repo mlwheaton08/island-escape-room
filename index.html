@@ -16,6 +16,7 @@
             --bg-secondary-color: rgb(5, 34, 27);
             --bg-color-tertiary: rgb(255, 179, 37);
             --bg-color-quaternary: rgb(247, 216, 46);
+            --bg-color-gray: rgb(233, 233, 233);
             --text-primary-color: black;
             --text-secondary-color: white;
             --text-tertiary-color: rgb(247, 216, 46);
@@ -136,7 +137,7 @@
             background-color: var(--bg-color-quaternary);
         }
 
-        .book-now-icon {
+        .btn.book-now.nav svg {
             width: calc(0.2 * var(--nav-height));
             height: 100%;
             margin: auto 0 auto 3px;
@@ -186,18 +187,99 @@
         /* Hero */
         #section-hero {
             margin-top: var(--nav-height);
-            height: calc(100vh - var(--nav-height) + 1px);
+            padding: 120px 4vw 100px;
+            box-sizing: border-box;
+            /* height: calc(100vh - var(--nav-height) + 1px); */
+            min-height: calc(100vh - var(--nav-height) + 1px);
+            max-height: fit-content;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6vw;
-            padding: 0 5vw;
+            justify-content: space-around;
+            align-items: start;
+            flex-wrap: wrap;
+            gap: 50px;
             background-image: url(./assets/home-splash.jpg);
             background-size: cover;
             background-position: center;
         }
 
-        #section-hero img {
+        .hero-card {
+            position: relative;
+            width: 400px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0;
+            box-shadow: 3px 3px 10px black;
+        }
+
+        .hero-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-img-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 150px 4% 0;
+            box-sizing: border-box;
+            background: rgba(0, 0, 0, 0.3); /* Semi-transparent black background */
+            color: white;
+            display: flex;
+            text-align: left;
+        }
+        
+        .hero-img-overlay h2 {
+            font-family: "Rye", "Titillium Web", serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-shadow: 0 0 3px black;
+        }
+
+        .hero-img-overlay p {
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 200;
+            letter-spacing: 1px;
+            font-style: italic;
+            text-shadow: 0 0 2px black;
+        }
+
+        .btn.book-now.hero {
+            width: fit-content;
+            margin-top: 20px;
+            padding: 0 10px;
+            text-decoration: none;
+            text-shadow: none;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .btn.book-now.hero span {
+            font-size: 1.2rem;
+        }
+
+        .btn.book-now.hero svg {
+            width: 14px;
+            margin: auto 0 auto 3px;
+            fill: var(--text-primary-color);
+        }
+
+        .hero-img-overlay.museum {
+            padding-top: 98px;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        /* #section-hero img {
             width: 25%;
             height: 80%;
             object-fit: cover;
@@ -226,20 +308,55 @@
             font-size: 1.5rem;
             font-weight: 500;
             color: var(--bg-secondary-color);
-        }
-
-        .btn.book-now.hero {
-            width: fit-content;
-            text-decoration: none;
-            text-shadow: none;
-            font-size: 1.5rem;
-            transition: all 0.3s;
-        }
+        } */
 
         /* About */
         #about {
             padding: 80px 5vw;
-            background-color: rgb(233, 233, 233);
+            background-color: var(--bg-color-gray);
+        }
+
+        .story-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .story-img-container {
+            position: relative;
+            display: flex;
+            font-size: 0; /* this gets rid of a little gap between images */
+        }
+
+        .story-img-container img {
+            width: 230px;
+            height: 230px;
+            object-fit: cover;
+            object-position: 50% 64%;
+        }
+
+        .story-img-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(
+                to right,
+                var(--bg-color-gray),
+                rgba(0, 0, 0, 0),
+                rgba(0, 0, 0, 0),
+                rgba(0, 0, 0, 0),
+                rgba(0, 0, 0, 0),
+                var(--bg-color-gray)
+            );
+        }
+
+        .story-container p {
+            width: 60%;
         }
 
         /* Footer */
@@ -314,6 +431,20 @@
                 font-size: 1.1rem;
             }
             #section-hero {
+                padding-top: 90px;
+            }
+            .hero-card {
+                /* width: 0px; */
+                height: 250px;
+            }
+            .hero-img-overlay {
+                padding-top: 0;
+                background-color: rgba(0, 0, 0, 0.4);
+            }
+            .hero-img-overlay.museum {
+                padding-top: 0;
+            }
+            /* #section-hero {
                 align-items: start;
             }
             #hero-text-container {
@@ -329,9 +460,22 @@
             #hero-text-container p {
                 align-items: center;
                 gap: 50px;
-            }
+            } */
             #about {
                 padding: 60px 0;
+            }
+            .story-img-container img:nth-child(1),
+            .story-img-container img:nth-child(3),
+            .story-img-cover {
+                display: none;
+            }
+            .story-img-container img:nth-child(2) {
+                width: 350px;
+                height: 350px;
+            }
+            .story-container p {
+                width: 75%;
+                font-size: 1rem;
             }
             footer {
                 padding-bottom: 50px;
@@ -360,7 +504,17 @@
             #nav-mobile {
                 display: flex;
             }
-            #hero-text-container h1 {
+            .hero-card {
+                width: 80vw;
+                height: 220px;
+            }
+            .hero-img-overlay h2 {
+                font-size: 1.3rem;
+            }
+            .hero-img-overlay p {
+                font-size: 0.9rem;
+            }
+            /* #hero-text-container h1 {
                 font-size: 3rem;
             }
             #hero-text-container p {
@@ -368,9 +522,13 @@
             }
             #section-hero img {
                 display: none;
-            }
+            } */
             #about {
                 padding: 40px 0;
+            }
+            .story-img-container img:nth-child(2) {
+                width: 280px;
+                height: 280px;
             }
             footer {
                 padding-bottom: 0;
@@ -389,6 +547,9 @@
         <!-- Desktop Nav -->
         <nav id="nav-desktop">
             <ul>
+                <li>
+                    <a onclick="scrollToSection('rooms')">ROOMS</a>
+                </li>
                 <li>
                     <a onclick="scrollToSection('about')">ABOUT</a>
                 </li>
@@ -436,7 +597,33 @@
     <!-- MAIN -->
     <main id="main">
         <section id="section-hero">
-            <img src="./assets/doll.png" />
+            <div class="hero-card">
+                <img src="./assets/lantern-notebook.JPG" />
+                <div class="hero-img-overlay">
+                    <h2>Cabin Mysteries</h2>
+                    <p>Solve the mysteries and escape the cabin before the time runs out!</p>
+                    <a class="btn book-now hero" href="https://islandescaperoom.resova.us/items/availability?firstPage=true" target="_blank">
+                        <span>BOOK NOW</span>
+                        <svg class="book-now-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-card">
+                <img src="./assets/paintings.jpg" />
+                <div class="hero-img-overlay museum">
+                    <h2>Museum Heist</h2>
+                    <p>COMING SOON!</p>
+                    <!-- <a class="btn book-now hero" href="https://islandescaperoom.resova.us/items/availability?firstPage=true" target="_blank">
+                        <span>BOOK NOW</span>
+                        <svg class="book-now-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/>
+                        </svg>
+                    </a> -->
+                </div>
+            </div>
+            <!-- <img src="./assets/doll.png" />
             <div id="hero-text-container">
                 <h1>Cabin Mysteries</h1>
                 <p>
@@ -448,11 +635,20 @@
                         </svg>
                     </a>
                 </p>
-            </div>
+            </div> -->
         </section>
         <section id="about">
-            <h2>OUR STORY</h2>
-            <p style="text-align: center; margin-bottom: 80px; padding: 20px 40px;">Forrest Palis started this one-man project in the winter of 2023. After visiting other escape rooms, he was inpired to build his own. He started very small, crafting an escape room in his own house for his family to test out. Witnessing the amount of fun they had gave him all the confidence he needed to rent a space and go all-in on creating his own professional escape room. He worked tirelessly outside of his day job, learning carpentry skills and building a room all on his own. He studied puzzles, took notes, and came up with his own perfectly themed puzzles to give the customers a once-in-a-lifetime experience. After running test groups with friends, family, and strangers, and tweaking a few things here and there, he officially opened the first escape room at The Island, and currently the <b>only</b> escape room in Carbondale, in November 2024. With the business up and running, Forrest has begun planning his next escape room, <b>Museum Heist</b>.</p>
+            <h2>HOW IT STARTED</h2>
+            <div class="story-container">
+                <div class="story-img-container">
+                    <img src="./assets/forrest-2.PNG" />
+                    <img src="./assets/forrest-1.PNG" />
+                    <img src="./assets/construction-1.JPG" />
+                    <!-- <img src="./assets/construction-2.PNG" /> -->
+                    <div class="story-img-cover"></div>
+                </div>
+                <p style="text-align: center; margin-bottom: 80px; padding: 20px 40px;">Forrest Palis started this one-man project in the winter of 2023. After visiting other escape rooms, he was inpired to build his own. He started very small, crafting an escape room in his own house for his family to test out. Witnessing the amount of fun they had gave him all the confidence he needed to rent a space and go all-in on creating his own professional escape room. He worked tirelessly outside of his day job, learning carpentry skills and building a room all on his own. He studied puzzles, took notes, and came up with his own perfectly themed puzzles to give the customers a once-in-a-lifetime experience. After running test groups with friends, family, and strangers, and tweaking a few things here and there, he officially opened the first escape room at The Island, and currently the <b>only</b> escape room in Carbondale, in November 2024. With the business up and running, Forrest has begun planning his next escape room, <b>Museum Heist</b>.</p>
+            </div>
             <h2>WHY CHOOSE US?</h2>
             <div class="info-blocks-container why-us">
                 <div>
