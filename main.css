@@ -1,0 +1,536 @@
+:root {
+    /* font-size: 16px;  Note: this is the default font size for most browsers already, so no need to adjust it. also it may be better to leave it alone for accessibility purposes, like a user having their font size larger */
+    --bg-primary-color: rgb(255, 255, 255);
+    --bg-secondary-color: rgb(44, 3, 53);
+    --bg-color-tertiary: rgb(255, 179, 37);
+    --bg-color-quaternary: rgb(247, 216, 46);
+    --bg-color-gray: rgb(233, 233, 233);
+    --bg-color-black: rgb(12, 12, 12);
+    --text-primary-color: black;
+    --text-secondary-color: white;
+    --text-tertiary-color: rgb(247, 216, 46);
+    --nav-height: 70px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: "Titillium Web", serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+h2 {
+    text-align: center;
+    margin: 0;
+    padding: 10px 0;
+    font-size: 3rem;
+    font-weight: 200;
+    letter-spacing: 1px;
+}
+
+h3 {
+    font-size: 1.4rem;
+    margin-top: 0;
+}
+
+p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+svg {
+    /* padding: 0px; */
+    /* width: 37px;
+    height: 37px; */
+    fill: white;
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    width: 100vw;
+    box-sizing: border-box;
+    height: var(--nav-height);
+    display: flex;
+    padding: 0 3vw;
+    /* background-color: var(--bg-secondary-color); */
+    background-color: var(--bg-color-black);
+    color: var(--text-secondary-color);
+}
+
+#title {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+#title img {
+    width: calc(1.5 * var(--nav-height));
+    height: var(--nav-height);
+    object-fit: cover;
+}
+
+#title h1 {
+    margin: 0;
+    margin-left: 15px;
+    font-size: 1.7rem;
+    font-weight: 200;
+    letter-spacing: 1px;
+}
+
+/* Nav Desktop */
+nav {
+    width: 50%;
+}
+
+nav ul {
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav ul li a {
+    all: unset;
+    font-size: 1.3rem;
+    transition: all 0.3s;
+}
+
+nav ul li a:hover {
+    cursor: pointer;
+    color: var(--text-tertiary-color);
+}
+
+.btn.book-now {
+    background-color: var(--bg-color-tertiary);
+    color: var(--text-primary-color);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-weight: 500;
+}
+
+.btn.book-now:hover {
+    background-color: var(--bg-color-quaternary);
+}
+
+.btn.book-now.nav svg {
+    width: calc(0.2 * var(--nav-height));
+    height: 100%;
+    margin: auto 0 auto 3px;
+    fill: var(--text-primary-color);
+}
+
+/* Nav Mobile */
+#nav-mobile {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+#mobile-nav-icon {
+    height: 55%;
+    transition: all 0.3s;
+}
+
+#mobile-nav-icon.active {
+    fill: var(--bg-color-tertiary);
+}
+
+#mobile-nav-dropdown {
+    opacity: 0;
+    max-height: 0;
+    position: fixed;
+    z-index: 1000;
+    top: var(--nav-height);
+    left: 0;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.664);
+    transition: all 0.3s;
+}
+
+#mobile-nav-dropdown.show {
+    opacity: 1;
+    max-height: 700px;
+}
+
+#mobile-nav-dropdown ul {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px;
+}
+
+/* Hero */
+#hero {
+    box-sizing: border-box;
+    min-height: calc(100vh - var(--nav-height) + 1px);
+    max-height: fit-content;
+    margin-top: var(--nav-height);
+    padding-top: 120px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--bg-color-black);
+    color: var(--text-secondary-color);
+}
+
+.hero-group.text h1 {
+    margin: 0;
+    font-family: "Bona Nova SC", serif;
+    font-size: 5.8rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.hero-group.text p {
+    margin: 30px 0 20px;
+    font-size: 1.2rem;
+}
+
+.hero-group.text .btn.book-now {
+    width: fit-content;
+    margin-top: 20px;
+    padding: 5px 12px;
+    text-decoration: none;
+    text-shadow: none;
+    font-size: 1.5rem;
+    transition: all 0.3s;
+}
+
+.hero-group.text .btn.book-now span {
+    font-size: 1.8rem;
+}
+
+.hero-group.text .btn.book-now svg {
+    width: 18px;
+    margin: auto 0 auto 3px;
+    fill: var(--text-primary-color);
+}
+
+.hero-group.img {
+    position: relative;
+}
+
+.hero-group.img img {
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+}
+
+.hero-group.img .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 500px;
+    height: 500px;
+    background-image: radial-gradient(
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0),
+        var(--bg-color-black),
+        var(--bg-color-black),
+        var(--bg-color-black)
+    );
+}
+
+/* Rooms */
+#rooms {
+    box-sizing: border-box;
+    min-height: calc(100vh - var(--nav-height) + 1px);
+    max-height: fit-content;
+    padding-top: 80px;
+}
+
+#rooms h2 {
+    color: var(--bg-secondary-color);
+}
+
+.rooms-cards-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    flex-wrap: wrap;
+    gap: 50px;
+    padding: 0 6vw;
+}
+
+.rooms-card {
+    position: relative;
+    width: 400px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0;
+    box-shadow: 3px 3px 10px black;
+}
+
+.rooms-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.rooms-img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 150px 4% 0;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    color: white;
+    display: flex;
+    text-align: left;
+}
+
+.rooms-img-overlay h3 {
+    font-family: "Rye", serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-shadow: 0 0 3px black;
+}
+
+.rooms-img-overlay p {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 200;
+    letter-spacing: 1px;
+    font-style: italic;
+    text-shadow: 0 0 2px black;
+}
+
+.rooms-img-overlay.museum {
+    padding-top: 98px;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* About */
+#about {
+    padding: 80px 5vw;
+    background-color: var(--bg-color-gray);
+}
+
+.story-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.story-img-container {
+    position: relative;
+    display: flex;
+    font-size: 0; /* this gets rid of a little gap between images */
+}
+
+.story-img-container img {
+    width: 230px;
+    height: 230px;
+    object-fit: cover;
+    object-position: 50% 64%;
+}
+
+.story-img-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+        to right,
+        var(--bg-color-gray),
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0),
+        var(--bg-color-gray)
+    );
+}
+
+.story-container p {
+    width: 60%;
+}
+
+/* Footer */
+footer {
+    background-color: var(--bg-secondary-color);
+    color: white;
+}
+
+#map { height: 400px; }
+
+.info-blocks-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px 40px;
+}
+
+.info-blocks-container.contact {
+    padding-bottom: 100px;
+}
+
+.info-blocks-container > * {
+    text-align: center;
+}
+
+.info-blocks-container div {
+    flex: 1 1 22%;  /* Adjust the width of each div */
+    margin: 10px;   /* Add space between items */
+    max-width: 350px;
+}
+
+.info-blocks-container.contact h3 {
+    color: var(--text-tertiary-color);
+}
+
+#socials-icons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px
+}
+
+.socials-icon {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    transition: all 0.3s;
+}
+
+.socials-icon:hover {
+    fill: var(--text-tertiary-color);
+}
+
+#call-to-action {
+    padding: 3px 0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-primary-color);
+    background-color: var(--text-tertiary-color);
+}
+
+/* For smaller screens (e.g., tablets and below), use 2 items per row */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 2.3rem;
+    }
+    .info-blocks-container div {
+        flex: 1 1 45%; /* Each div takes 45% of the row */
+    }
+    #title {
+        width: 33%;
+    }
+    nav {
+        width: 67%;
+    }
+    nav ul {
+        gap: 25px;
+    }
+    #title h1 {
+        display: none;
+    }
+    nav ul li a {
+        font-size: 1.1rem;
+    }
+    #hero {
+        padding-top: 90px;
+    }
+    .rooms-card {
+        /* width: 0px; */
+        height: 250px;
+    }
+    .rooms-img-overlay {
+        padding-top: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+    .rooms-img-overlay.museum {
+        padding-top: 0;
+    }
+    #about {
+        padding: 60px 0;
+    }
+    .story-img-container img:nth-child(1),
+    .story-img-container img:nth-child(3),
+    .story-img-cover {
+        display: none;
+    }
+    .story-img-container img:nth-child(2) {
+        width: 350px;
+        height: 350px;
+    }
+    .story-container p {
+        width: 75%;
+        font-size: 1rem;
+    }
+    footer {
+        padding-bottom: 50px;
+    }
+}
+
+/* For mobile screens, stack all items vertically */
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.7rem;
+        font-weight: 300;
+    }
+    h3 {
+        font-size: 1.2rem;
+    }
+    .info-blocks-container div {
+        flex: 1 1 100%; /* Each div takes up full width */
+    }
+    header {
+        justify-content: space-between;
+        /* align-items: center; */
+    }
+    #nav-desktop {
+        display: none;
+    }
+    #nav-mobile {
+        display: flex;
+    }
+    .rooms-card {
+        width: 80vw;
+        height: 220px;
+    }
+    .rooms-img-overlay h3 {
+        font-size: 1.3rem;
+    }
+    .rooms-img-overlay p {
+        font-size: 0.9rem;
+    }
+    #about {
+        padding: 40px 0;
+    }
+    .story-img-container img:nth-child(2) {
+        width: 280px;
+        height: 280px;
+    }
+    footer {
+        padding-bottom: 0;
+    }
+}

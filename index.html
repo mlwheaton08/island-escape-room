@@ -4,537 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Island Escape Room</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Rye&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <style>
-        :root {
-            /* font-size: 16px;  Note: this is the default font size for most browsers already, so no need to adjust it. also it may be better to leave it alone for accessibility purposes, like a user having their font size larger */
-            --bg-primary-color: rgb(255, 255, 255);
-            --bg-secondary-color: rgb(5, 34, 27);
-            --bg-color-tertiary: rgb(255, 179, 37);
-            --bg-color-quaternary: rgb(247, 216, 46);
-            --bg-color-gray: rgb(233, 233, 233);
-            --text-primary-color: black;
-            --text-secondary-color: white;
-            --text-tertiary-color: rgb(247, 216, 46);
-            --nav-height: 70px;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            font-family: "Titillium Web", serif;
-            font-weight: 300;
-            font-style: normal;
-        }
-
-        h2 {
-            text-align: center;
-            margin: 0;
-            padding: 10px 0;
-            font-size: 3rem;
-            font-weight: 200;
-            letter-spacing: 1px;
-        }
-
-        h3 {
-            font-size: 1.4rem;
-            margin-top: 0;
-        }
-
-        p {
-            margin: 0;
-            font-size: 1.1rem;
-        }
-
-        svg {
-            /* padding: 0px; */
-            /* width: 37px;
-            height: 37px; */
-            fill: white;
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            width: 100vw;
-            box-sizing: border-box;
-            height: var(--nav-height);
-            display: flex;
-            padding: 0 3vw;
-            background-color: var(--bg-secondary-color);
-            color: var(--text-secondary-color);
-        }
-
-        #title {
-            width: 50%;
-            height: 100%;
-            display: flex;
-            justify-content: start;
-            align-items: center;
-        }
-
-        #title img {
-            width: calc(1.5 * var(--nav-height));
-            height: var(--nav-height);
-            object-fit: cover;
-        }
-
-        #title h1 {
-            margin: 0;
-            margin-left: 15px;
-            font-size: 1.7rem;
-            font-weight: 200;
-            letter-spacing: 1px;
-        }
-
-        /* Nav Desktop */
-        nav {
-            width: 50%;
-        }
-
-        nav ul {
-            height: 100%;
-            display: flex;
-            justify-content: end;
-            align-items: center;
-            gap: 30px;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        nav ul li a {
-            all: unset;
-            font-size: 1.3rem;
-            transition: all 0.3s;
-        }
-
-        nav ul li a:hover {
-            cursor: pointer;
-            color: var(--text-tertiary-color);
-        }
-
-        .btn.book-now {
-            background-color: var(--bg-color-tertiary);
-            color: var(--text-primary-color);
-            border-radius: 6px;
-            padding: 4px 10px;
-            font-weight: 500;
-        }
-
-        .btn.book-now:hover {
-            background-color: var(--bg-color-quaternary);
-        }
-
-        .btn.book-now.nav svg {
-            width: calc(0.2 * var(--nav-height));
-            height: 100%;
-            margin: auto 0 auto 3px;
-            fill: var(--text-primary-color);
-        }
-
-        /* Nav Mobile */
-        #nav-mobile {
-            display: none;
-            justify-content: center;
-            align-items: center;
-            margin-right: 10px;
-        }
-
-        #mobile-nav-icon {
-            height: 55%;
-            transition: all 0.3s;
-        }
-
-        #mobile-nav-icon.active {
-            fill: var(--bg-color-tertiary);
-        }
-
-        #mobile-nav-dropdown {
-            opacity: 0;
-            max-height: 0;
-            position: fixed;
-            z-index: 1000;
-            top: var(--nav-height);
-            left: 0;
-            width: 100vw;
-            background-color: rgba(0, 0, 0, 0.664);
-            transition: all 0.3s;
-        }
-
-        #mobile-nav-dropdown.show {
-            opacity: 1;
-            max-height: 700px;
-        }
-
-        #mobile-nav-dropdown ul {
-            display: flex;
-            flex-direction: column;
-            padding: 20px 10px;
-        }
-
-        /* Hero */
-        #section-hero {
-            margin-top: var(--nav-height);
-            padding: 120px 4vw 100px;
-            box-sizing: border-box;
-            /* height: calc(100vh - var(--nav-height) + 1px); */
-            min-height: calc(100vh - var(--nav-height) + 1px);
-            max-height: fit-content;
-            display: flex;
-            justify-content: space-around;
-            align-items: start;
-            flex-wrap: wrap;
-            gap: 50px;
-            background-image: url(./assets/home-splash.jpg);
-            background-size: cover;
-            background-position: center;
-        }
-
-        .hero-card {
-            position: relative;
-            width: 400px;
-            height: 500px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 0;
-            box-shadow: 3px 3px 10px black;
-        }
-
-        .hero-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-img-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 150px 4% 0;
-            box-sizing: border-box;
-            background: rgba(0, 0, 0, 0.3); /* Semi-transparent black background */
-            color: white;
-            display: flex;
-            text-align: left;
-        }
-        
-        .hero-img-overlay h2 {
-            font-family: "Rye", "Titillium Web", serif;
-            font-size: 1.5rem;
-            font-weight: 400;
-            letter-spacing: 1px;
-            text-shadow: 0 0 3px black;
-        }
-
-        .hero-img-overlay p {
-            text-align: center;
-            font-size: 1rem;
-            font-weight: 200;
-            letter-spacing: 1px;
-            font-style: italic;
-            text-shadow: 0 0 2px black;
-        }
-
-        .btn.book-now.hero {
-            width: fit-content;
-            margin-top: 20px;
-            padding: 0 10px;
-            text-decoration: none;
-            text-shadow: none;
-            font-size: 1.5rem;
-            transition: all 0.3s;
-        }
-
-        .btn.book-now.hero span {
-            font-size: 1.2rem;
-        }
-
-        .btn.book-now.hero svg {
-            width: 14px;
-            margin: auto 0 auto 3px;
-            fill: var(--text-primary-color);
-        }
-
-        .hero-img-overlay.museum {
-            padding-top: 98px;
-            background: rgba(0, 0, 0, 0.8);
-        }
-
-        /* #section-hero img {
-            width: 25%;
-            height: 80%;
-            object-fit: cover;
-            border-radius: 20px;
-            border: 4px solid var(--bg-secondary-color);
-        }
-
-        #hero-text-container {
-            text-shadow: 0 0 3px var(--text-secondary-color);
-            padding-bottom: 20vh;
-        }
-
-        #hero-text-container h1 {
-            margin: 0 0 20px;
-            font-family: "Rye", "Titillium Web", serif;
-            font-size: 6rem;
-            font-weight: 400;
-            letter-spacing: 1px;
-            color: var(--bg-secondary-color);
-        }
-
-        #hero-text-container p {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--bg-secondary-color);
-        } */
-
-        /* About */
-        #about {
-            padding: 80px 5vw;
-            background-color: var(--bg-color-gray);
-        }
-
-        .story-container {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .story-img-container {
-            position: relative;
-            display: flex;
-            font-size: 0; /* this gets rid of a little gap between images */
-        }
-
-        .story-img-container img {
-            width: 230px;
-            height: 230px;
-            object-fit: cover;
-            object-position: 50% 64%;
-        }
-
-        .story-img-cover {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: linear-gradient(
-                to right,
-                var(--bg-color-gray),
-                rgba(0, 0, 0, 0),
-                rgba(0, 0, 0, 0),
-                rgba(0, 0, 0, 0),
-                rgba(0, 0, 0, 0),
-                var(--bg-color-gray)
-            );
-        }
-
-        .story-container p {
-            width: 60%;
-        }
-
-        /* Footer */
-        footer {
-            padding-bottom: 100px;
-            background-color: var(--bg-secondary-color);
-            color: white;
-        }
-
-        #map { height: 400px; }
-
-        .info-blocks-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 20px 40px;
-        }
-
-        .info-blocks-container > * {
-            text-align: center;
-        }
-
-        .info-blocks-container div {
-            flex: 1 1 22%;  /* Adjust the width of each div */
-            margin: 10px;   /* Add space between items */
-            max-width: 350px;
-        }
-
-        .info-blocks-container.contact h3 {
-            color: var(--text-tertiary-color);
-        }
-
-        #socials-icons-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px
-        }
-
-        .socials-icon {
-            width: 100%;
-            height: 100%;
-            margin: auto;
-            transition: all 0.3s;
-        }
-
-        .socials-icon:hover {
-            fill: var(--text-tertiary-color);
-        }
-
-        /* For smaller screens (e.g., tablets and below), use 2 items per row */
-        @media (max-width: 768px) {
-            h2 {
-                font-size: 2.3rem;
-            }
-            .info-blocks-container div {
-                flex: 1 1 45%; /* Each div takes 45% of the row */
-            }
-            #title {
-                width: 33%;
-            }
-            nav {
-                width: 67%;
-            }
-            nav ul {
-                gap: 25px;
-            }
-            #title h1 {
-                display: none;
-            }
-            nav ul li a {
-                font-size: 1.1rem;
-            }
-            #section-hero {
-                padding-top: 90px;
-            }
-            .hero-card {
-                /* width: 0px; */
-                height: 250px;
-            }
-            .hero-img-overlay {
-                padding-top: 0;
-                background-color: rgba(0, 0, 0, 0.4);
-            }
-            .hero-img-overlay.museum {
-                padding-top: 0;
-            }
-            /* #section-hero {
-                align-items: start;
-            }
-            #hero-text-container {
-                margin-top: 10vh;
-                text-align: center;
-            }
-            #section-hero img {
-                display: none;
-            }
-            #hero-text-container h1 {
-                font-size: 4rem;
-            }
-            #hero-text-container p {
-                align-items: center;
-                gap: 50px;
-            } */
-            #about {
-                padding: 60px 0;
-            }
-            .story-img-container img:nth-child(1),
-            .story-img-container img:nth-child(3),
-            .story-img-cover {
-                display: none;
-            }
-            .story-img-container img:nth-child(2) {
-                width: 350px;
-                height: 350px;
-            }
-            .story-container p {
-                width: 75%;
-                font-size: 1rem;
-            }
-            footer {
-                padding-bottom: 50px;
-            }
-        }
-
-        /* For mobile screens, stack all items vertically */
-        @media (max-width: 480px) {
-            h2 {
-                font-size: 1.7rem;
-                font-weight: 300;
-            }
-            h3 {
-                font-size: 1.2rem;
-            }
-            .info-blocks-container div {
-                flex: 1 1 100%; /* Each div takes up full width */
-            }
-            header {
-                justify-content: space-between;
-                /* align-items: center; */
-            }
-            #nav-desktop {
-                display: none;
-            }
-            #nav-mobile {
-                display: flex;
-            }
-            .hero-card {
-                width: 80vw;
-                height: 220px;
-            }
-            .hero-img-overlay h2 {
-                font-size: 1.3rem;
-            }
-            .hero-img-overlay p {
-                font-size: 0.9rem;
-            }
-            /* #hero-text-container h1 {
-                font-size: 3rem;
-            }
-            #hero-text-container p {
-                font-size: 1.3rem;
-            }
-            #section-hero img {
-                display: none;
-            } */
-            #about {
-                padding: 40px 0;
-            }
-            .story-img-container img:nth-child(2) {
-                width: 280px;
-                height: 280px;
-            }
-            footer {
-                padding-bottom: 0;
-            }
-        }
-    </style>
 </head>
 <body>
     <!-- HEADER -->
@@ -596,46 +70,41 @@
 
     <!-- MAIN -->
     <main id="main">
-        <section id="section-hero">
-            <div class="hero-card">
+        <section id="hero">
+            <div class="hero-group text">
+                <h1>Are you ready<br>to Escape?</h1>
+                <p>Join us for thrilling puzzles and unforgettable teamwork!</p>
+                <a class="btn book-now" href="https://islandescaperoom.resova.us/items/availability?firstPage=true" target="_blank">
+                    <span>BOOK NOW</span>
+                    <svg class="book-now-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="hero-group img">
                 <img src="./assets/lantern-notebook.JPG" />
-                <div class="hero-img-overlay">
-                    <h2>Cabin Mysteries</h2>
-                    <p>Solve the mysteries and escape the cabin before the time runs out!</p>
-                    <a class="btn book-now hero" href="https://islandescaperoom.resova.us/items/availability?firstPage=true" target="_blank">
-                        <span>BOOK NOW</span>
-                        <svg class="book-now-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/>
-                        </svg>
-                    </a>
+                <div class="overlay"></div>
+            </div>
+        </section>
+
+        <section id="rooms">
+            <h2>ROOMS</h2>
+            <div class="rooms-cards-container">
+                <div class="rooms-card">
+                    <img src="./assets/padlock.JPG" />
+                    <div class="rooms-img-overlay">
+                        <h3>Cabin Mysteries</h3>
+                        <p>Grab your groups of 2 – 8 people and experience the thrill of navigating through a serene yet mysterious forest (indoors) and discover a secluded cabin hiding its secrets. Work with your team to solve the puzzles and break into the cabin to uncover its hidden story to escape the cabin mysteries.</p>
+                    </div>
+                </div>
+                <div class="rooms-card">
+                    <img src="./assets/paintings.jpg" />
+                    <div class="rooms-img-overlay museum">
+                        <h3>Museum Heist</h3>
+                        <p>COMING SOON!</p>
+                    </div>
                 </div>
             </div>
-            <div class="hero-card">
-                <img src="./assets/paintings.jpg" />
-                <div class="hero-img-overlay museum">
-                    <h2>Museum Heist</h2>
-                    <p>COMING SOON!</p>
-                    <!-- <a class="btn book-now hero" href="https://islandescaperoom.resova.us/items/availability?firstPage=true" target="_blank">
-                        <span>BOOK NOW</span>
-                        <svg class="book-now-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/>
-                        </svg>
-                    </a> -->
-                </div>
-            </div>
-            <!-- <img src="./assets/doll.png" />
-            <div id="hero-text-container">
-                <h1>Cabin Mysteries</h1>
-                <p>
-                    <span><i>Solve the mysteries and escape the cabin before the time runs out!</i></span>
-                    <a class="btn book-now hero" href="https://islandescaperoom.resova.us/items/availability?firstPage=true" target="_blank">
-                        <span>BOOK NOW</span>
-                        <svg class="book-now-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/>
-                        </svg>
-                    </a>
-                </p>
-            </div> -->
         </section>
         <section id="about">
             <h2>HOW IT STARTED</h2>
@@ -712,6 +181,8 @@
                 </div>
             </div>
         </section>
+
+        <div id="call-to-action">Interested in a website like this? Reach out to mlwheaton06@gmail.com and let’s chat!</div>
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
