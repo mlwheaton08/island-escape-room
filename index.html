@@ -12,7 +12,7 @@
 </head>
 <body>
     <!-- HEADER -->
-    <header>
+    <header class="navbar">
         <div id="title">
             <img onclick="scrollToSection('main')" src="./assets/logo.png" />
             <h1><i>Island Escape Room</i></h1>
@@ -75,8 +75,8 @@
     <main id="main">
         <section id="hero">
             <div class="hero-group text">
-                <h1>Are you ready<br>to Escape?</h1>
-                <p>Your adventure begins here!</p>
+                <h1>Adventure Awaits</h1>
+                <p>Can you escape before the time runs out?</p>
                 <a class="btn book-now" href="https://islandescaperoom.resova.us/items/availability?firstPage=true" target="_blank">
                     <span>BOOK NOW</span>
                     <svg class="book-now-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -92,20 +92,31 @@
 
         <section id="rooms">
             <h2>ROOMS</h2>
-            <div class="rooms-cards-container">
-                <div class="rooms-card">
-                    <img src="./assets/padlock.JPG" />
-                    <div class="rooms-img-overlay">
-                        <h3>Cabin Mysteries</h3>
-                        <p>Grab your groups of 2 – 8 people and experience the thrill of navigating through a serene yet mysterious forest (indoors) and discover a secluded cabin hiding its secrets. Work with your team to solve the puzzles and break into the cabin to uncover its hidden story to escape the cabin mysteries.</p>
+            <div class="rooms-container">
+                <div class="room">
+                    <div class="card">
+                        <img src="./assets/padlock.JPG" />
+                        <div class="img-overlay">
+                            <h3>Cabin Mysteries</h3>
+                            <span>2 - 8 people | 60 min.</span>
+                        </div>
                     </div>
+                    <p>Step into a tranquil yet mysterious forest. Break into the cabin and uncover its dark secrets to escape before the time runs out!<span>-- This room is indoors --</span></p>
+                    <a class="btn book-now cabin" href="https://islandescaperoom.resova.us/items/availability?firstPage=true" target="_blank">
+                        <span>BOOK NOW</span>
+                        <svg class="book-now-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/>
+                        </svg>
+                    </a>
                 </div>
-                <div class="rooms-card">
-                    <img src="./assets/paintings.jpg" />
-                    <div class="rooms-img-overlay museum">
-                        <h3>Museum Heist</h3>
-                        <p>COMING SOON!</p>
+                <div class="room museum">
+                    <div class="card">
+                        <img src="./assets/paintings.jpg" />
+                        <div class="img-overlay">
+                            <h3>Museum Heist</h3>
+                        </div>
                     </div>
+                    <p>COMING SOON!</p>
                 </div>
             </div>
         </section>
@@ -238,6 +249,33 @@
                 behavior: 'smooth'
             })
         }
+
+        const navbar = document.querySelector('.navbar')
+        const hero = document.getElementById('hero')
+
+        // Get the height of the hero section
+        const navbarHeight = navbar.offsetHeight
+        const heroHeight = hero.offsetHeight
+
+        function debounce(fn, delay) {
+        let timer
+        return function () {
+            const context = this
+            const args = arguments
+            clearTimeout(timer)
+            timer = setTimeout(() => fn.apply(context, args), delay)
+        };
+        }
+
+        // Example: Debouncing scroll event
+        window.addEventListener('scroll', debounce(function () {
+            if (window.scrollY >= (heroHeight - 1)) {
+                navbar.classList.add('scrolled')
+            } else {
+                navbar.classList.remove('scrolled')
+            }
+            console.log('Scroll event handled')
+        }, 200))
     </script>
 </body>
 </html>
