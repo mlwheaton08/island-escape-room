@@ -55,7 +55,7 @@ svg {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 9999;
     width: 100vw;
     box-sizing: border-box;
     height: var(--nav-height);
@@ -241,10 +241,10 @@ nav ul li a:hover {
 .hero-group.img {
     position: absolute;
     bottom: 50%;
-    right: 30%;
+    right: 40%;
     transform: translate(50%, 50%);
-    aspect-ratio: 1 / 1;
-    width: 50vw;
+    /* aspect-ratio: 1 / 1; */
+    width: 80vw;
     min-width: 200px;
 }
 
@@ -265,7 +265,7 @@ nav ul li a:hover {
     height: 100%;
     border-radius: 50%;
     background-image: radial-gradient(
-        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.3),
         rgba(0, 0, 0, 0.7),
         var(--bg-color-black),
         var(--bg-color-black)
