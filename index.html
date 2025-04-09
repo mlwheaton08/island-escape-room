@@ -174,8 +174,8 @@
             <div>
                 <h3>Contact</h3>
                 <p>
-                    (618) 999-1126
-                    <br>islandescaperoom@gmail.com
+                    <span class="phone-number">(618) 999-1126</span>
+                    <br><span id="email-island"></span>
                 </p>
             </div>
             <div>
@@ -195,14 +195,16 @@
             </div>
         </section>
 
-        <div id="call-to-action">Interested in a website like this? Reach out to <span id="email"></span> and let’s chat!</div>
+        <div id="call-to-action">Interested in a website like this? Reach out to <span id="email-dev"></span> and let’s chat!</div>
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
-        // obfuscating email address to mitigate potential bots from scraping and sending spam
-        const email = 'mlwheaton06' + '@' + 'gmail' + '.' + 'com'
-        document.getElementById('email').innerHTML = email
+        // obfuscating email addresses to mitigate potential bots from scraping and sending spam
+        const email_dev = 'mlwheaton06' + '@' + 'gmail' + '.' + 'com'
+        const email_island = 'islandescaperoom' + '@' + 'gmail' + '.' + 'com'
+        document.getElementById('email-dev').innerHTML = email_dev
+        document.getElementById('email-island').innerHTML = email_island
 
         // Initialize the map
         var map = L.map('map').setView([37.72011838051414, -89.21757094312746], 16) // Center on your coordinates
@@ -259,13 +261,13 @@
         const heroHeight = hero.offsetHeight
 
         function debounce(fn, delay) {
-        let timer
-        return function () {
-            const context = this
-            const args = arguments
-            clearTimeout(timer)
-            timer = setTimeout(() => fn.apply(context, args), delay)
-        };
+            let timer
+            return function () {
+                const context = this
+                const args = arguments
+                clearTimeout(timer)
+                timer = setTimeout(() => fn.apply(context, args), delay)
+            }
         }
 
         // Example: Debouncing scroll event
